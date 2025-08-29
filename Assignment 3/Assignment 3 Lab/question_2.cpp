@@ -21,7 +21,7 @@ int isFull(Stack s){
     return (s.top == MAXLEN-1);
 }
 
-void push(Stack &s, int x){
+void push(Stack &s, char x){
     if(isFull(s)){
         cout << "Overflow" << endl;
     }
@@ -83,4 +83,5 @@ int main(){
         cout << rev[k++];
     }
     return 0;
+
 }
