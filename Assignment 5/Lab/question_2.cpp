@@ -33,43 +33,43 @@ Node* insertAtEnd(Node* head, int data){
     return head;
 }
 
-int count(Node* head, int value){
-    Node* temp = head;
-    int cnt = 0;
-    while(temp->next != NULL){
-        if(temp->val == value){
-            cnt++;
-        }
-    }
-    return cnt;
-}
 
-void display(Node* head){
-    while(head){
-        cout << head->val << " ";
+void display(Node* head) {
+    while (head != NULL) {
+        cout << head->val;
+        if (head->next != NULL) cout << "->";
         head = head->next;
     }
     cout << endl;
 }
 
-Node* delOccurances(Node* head, int value){
-    if(head == NULL){
-        return NULL;
+int count(Node* head, int value){
+    Node* temp = head;
+    int cnt = 0;
+    while(temp != NULL){
+        if(temp->val == value){
+            cnt++;
+        }
+        temp = temp->next;
     }
-    if(head->val == value){
+    return cnt;
+}
+
+Node* delOccurrences(Node* head, int value) {
+    while (head != NULL && head->val == value) {
         Node* temp = head;
         head = head->next;
         delete temp;
-        return head;
     }
     Node* temp = head;
-    while(temp!=NULL && temp->next!=NULL){
-        if(temp->next->val == value){
+    while (temp != NULL && temp->next != NULL) {
+        if (temp->next->val == value) {
             Node* delNode = temp->next;
             temp->next = temp->next->next;
             delete delNode;
+        } else {
+            temp = temp->next;
         }
-        temp = temp->next;
     }
     return head;
 }
@@ -87,10 +87,12 @@ int main(){
     for(int i=0; i<n; i++){
         head = insertAtEnd(head, arr[i]);
     }
-    cout << "Enter desired node value : ";
+    cout << "Enter key : ";
     int value;
     cin >> value;
-    cout << "Number of occurences : " << count(head, value) << endl;
-    head = delOccurances(head, value);
+    cout << "Count : " << count(head, value) << endl;
+    head = delOccurrences(head, value);
+    cout << "Updated Linked List : ";
     display(head);
+    return 0;
 }
